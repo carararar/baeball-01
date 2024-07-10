@@ -4,8 +4,15 @@ from game import Game
 
 
 class TestBaseball(TestCase):
-    def test_baseball_when_input_is_none(self):
+    def setUp(self):
         self.game = Game()
+        super().setUp()
+
+    def test_game_should_raise_exception_when_input_is_none(self):
         with self.assertRaises(TypeError):
             self.game.guess(None)
 
+
+    def test_game_should_raise_expception_when_input_length_is_unmatched(self):
+        with self.assertRaises(TypeError):
+            self.game.guess("12")
