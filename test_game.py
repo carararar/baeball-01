@@ -43,3 +43,5 @@ class TestBaseball(TestCase):
     def test_game_should_return_solve_result_when_some_matched_input(self):
         self.generate_question("123")
         self.assert_matched_number(self.game.guess("120"), False, 2, 0)
+        self.assert_matched_number(self.game.guess("061"), False, 0, 1)
+        self.assert_matched_number(self.game.guess("136"), False, 1, 1)
