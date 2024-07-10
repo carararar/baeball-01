@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from game import Game
+from game_result import GameResult
 
 
 class TestBaseball(TestCase):
@@ -27,6 +28,14 @@ class TestBaseball(TestCase):
         self.game.question = "123"
         result: GameResult = self.game.guess("123")
         self.assertIsNotNone(result)
-        self.assertTrue(result.solved)
-        self.assertEqual(3, result.strikes)
-        self.assertEqual(0, result.balls)
+        self.assertTrue(result.get_solved())
+        self.assertEqual(3, result.get_strikes())
+        self.assertEqual(0, result.get_balls())
+
+    def test_game_should_return_solve_result_when_unmatched_input(self):
+        self.game.question = "123"
+        result: GameResult = self.game.guess("456")
+        self.assertIsNotNone(result)
+        self.assertFalse(result.get_solved())
+        self.assertEqual(0, result.get_strikes())
+        self.assertEqual(0, result.get_balls())
